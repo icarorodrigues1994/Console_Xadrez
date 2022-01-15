@@ -21,5 +21,9 @@ namespace tabuleiro
             return pecas[linha, coluna];
         }
         
+        public void colocarPeca(Peca p, Posicao pos){
+            pecas[pos.linha, pos.coluna] = p;
+            p.posicao = pos;
+        }
     }
 }
