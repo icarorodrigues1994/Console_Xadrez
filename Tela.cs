@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using tabuleiro;
+using xadrez;
 
 namespace Xadrez
 {
@@ -28,10 +29,16 @@ namespace Xadrez
               }
               Console.WriteLine("  a b c d e f g h");
     }
+    public static PosicaoXadrez lerPosicaoXadrez(){
+        string s = Console.ReadLine();
+        char coluna = s[0]; 
+        int linha = int.Parse(s[1] + "");
+        return new PosicaoXadrez(coluna,linha);
+    }
     public static void imprimirPeca(Peca peca){
 
         if(peca.cor == Cor.Branca){
-            Console.Write(peca);
+            Console.Write(peca); 
         }
         else {
             ConsoleColor aux = Console.ForegroundColor;

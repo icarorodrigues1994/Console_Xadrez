@@ -1,7 +1,7 @@
 
 namespace tabuleiro
 {
-    public class Posicao {  
+    public class Posicao {  // UMA DETERMINADA POSICAO QUE VAI SERVIR COMO ATRIBUTO DA PECA //
         public int linha { get; set; }
         public int coluna { get; set; }
 
