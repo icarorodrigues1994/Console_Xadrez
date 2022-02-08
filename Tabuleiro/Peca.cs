@@ -1,7 +1,7 @@
 
 namespace tabuleiro
 {
-    public class Peca    // CLASSE PECA PODENDO SER QUALQUER PECA DE QUALQUER JOGO DE TABULEIRO //
+    public abstract class Peca    // CLASSE PECA PODENDO SER QUALQUER PECA DE QUALQUER JOGO DE TABULEIRO //
     {
         public Posicao posicao { get; set; } 
         public Cor cor { get; protected set; }
@@ -18,6 +18,8 @@ namespace tabuleiro
           public void incrementarQteMovimentos() {
             qteMovimentos++;
         }
+
+        public abstract bool [,] movimentosPossiveis();
 
 
     }
