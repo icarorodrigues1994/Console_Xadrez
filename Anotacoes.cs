@@ -27,4 +27,10 @@ colocarPeca(Peca p, Posicao pos) --> Metodo do Tabuleiro    ExemploPosicao => po
      7 - - - - - - - - 
 
        * E depois diz que p.posicao = pos 
+
+
+
+
+
+       ctrl + c == Finaliza o terminal.
        */
