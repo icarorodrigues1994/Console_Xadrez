@@ -20,11 +20,8 @@ namespace Xadrez {
             
             try{
             Console.Clear();
-            Tela.imprimirTabuleiro(partida.tab);
-            Console.WriteLine();  //PULA LINHA
-            Console.WriteLine("Turno: " + partida.turno); 
-            Console.WriteLine("Aguardando jogada: " + partida.jogadorAtual);
-
+            
+            Tela.imprimirPartida(partida);
 
             Console.WriteLine(); //PULA LINHA
             Console.WriteLine("Origem: ");
