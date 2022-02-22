@@ -65,14 +65,20 @@ namespace xadrez
                 desfazMovimento(origem, destino, pecasCapturada);
                 throw new TabuleiroException("Você não pode se colocar em xeque!");
             }
+
             if(estaEmXeque(adversaria(jogadorAtual))){
                 xeque = true;
             } else {
                 xeque = false;
             }
+
+            if(testeXequeMate(adversaria(jogadorAtual))){
+                terminada = true;
+            } else {
+                turno++;
+                mudaJogador();
+            }
             
-            turno++;
-            mudaJogador();
         }
 
         public void validarPosicaoDeOrigem(Posicao pos){
@@ -168,6 +174,32 @@ namespace xadrez
             return false;
         }
 
+        public bool testeXequeMate(Cor cor){
+            if(!estaEmXeque(cor)){    //Se Não está em Xeque é porque não chegou o xeque mate tbm
+                return false;
+            }
+
+            foreach(Peca x in pecasEmJogo(cor)){
+                bool[,] mat = x.movimentosPossiveis();
+                for(int i=0; i<tab.linhas; i++){
+                    for(int j=0; j<tab.colunas; j++){
+                        if(mat[i,j]){
+                            Posicao origem = x.posicao;
+                            Posicao destino = new Posicao(i,j);
+                            Peca pecaCapturada = executaMovimento(origem,destino);  // Movimenta a peça para essa posição so para poder testar
+                            bool testeXeque = estaEmXeque(cor); // Testando se a posição ainda está em Xeque.
+                            desfazMovimento(origem, destino, pecaCapturada); // Desfaz o movimento, pois só foi um teste para saber se estaa em movimento
+
+                            if(!testeXeque){  // Se NÃO está mais em Xeque, é pq também nao é xeque mate. 
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;  // Significa que está em xeque mate.
+        }
+
         public void colocarNovaPeca(char coluna, int linha, Peca peca) {
             tab.colocarPeca(peca, new PosicaoXadrez(coluna,linha).toPosicao());
             pecas.Add(peca);
@@ -176,18 +208,13 @@ namespace xadrez
         public void colocarPecas() {
 
             colocarNovaPeca('c', 1, new Torre(tab, Cor.Branca));    
-            colocarNovaPeca('c', 2, new Torre(tab, Cor.Branca));
-            colocarNovaPeca('d', 2, new Torre(tab, Cor.Branca));
-            colocarNovaPeca('e', 2, new Torre(tab, Cor.Branca));
-            colocarNovaPeca('e', 1, new Torre(tab, Cor.Branca));
             colocarNovaPeca('d', 1, new Rei(tab, Cor.Branca));
+            colocarNovaPeca('h', 7, new Torre(tab, Cor.Branca));
+            
 
-            colocarNovaPeca('c', 7, new Torre(tab, Cor.Preta));
-            colocarNovaPeca('c', 8, new Torre(tab, Cor.Preta));
-            colocarNovaPeca('d', 7, new Torre(tab, Cor.Preta));
-            colocarNovaPeca('e', 7, new Torre(tab, Cor.Preta));
-            colocarNovaPeca('e', 8, new Torre(tab, Cor.Preta));
-            colocarNovaPeca('d', 8, new Rei(tab, Cor.Preta));
+            colocarNovaPeca('a', 8, new Rei(tab, Cor.Preta));
+            colocarNovaPeca('b', 8, new Torre(tab, Cor.Preta));
+            
         }
         
     }

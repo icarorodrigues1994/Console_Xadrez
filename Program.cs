@@ -12,13 +12,13 @@ namespace Xadrez {
     class Program {
         static void Main (string [] args ){
 
-        try{
+    try{
             PartidaDeXadrez partida = new PartidaDeXadrez();
             partida.colocarPecas();
 
             while(!partida.terminada){
             
-            try{
+        try{
             Console.Clear();
             
             Tela.imprimirPartida(partida);
@@ -44,14 +44,16 @@ namespace Xadrez {
             
 
             }
+
             catch (TabuleiroException e){
                  Console.WriteLine(e.Message);
                  Console.ReadLine();
             }
 
             }
-            
-            Console.ReadLine();
+
+             Console.Clear();
+             Tela.imprimirPartida(partida);
            
             }
 
@@ -59,8 +61,10 @@ namespace Xadrez {
                 Console.WriteLine(e.Message);
             }
             
-            
+             Console.ReadLine();
         }
+            
+
     }
 }
 
